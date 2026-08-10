@@ -2,8 +2,8 @@ import Image from 'next/image';
 import styles from './Header.module.css';
 
 export default function Header({
-    title = 'Magia e Código',
-    subtitle = 'Escola de Magia e Tecnologia',
+    title = 'WizardDex',
+    subtitle = 'Explorando o mundo mágico',
     totalProducts,
 }) {
     return (
