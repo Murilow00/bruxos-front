@@ -11,7 +11,7 @@ export default function Home() {
             <section className={styles.heroPrincipal}>
                 <div className={styles.conteudoHero}>
                     <p className={styles.rotulo}>Início • Harry Potter</p>
-                    <h2 className={styles.titulo}>Descubra a magia em uma experiência digital</h2>
+                    <h1 className={styles.titulo}>Descubra a magia em uma experiência digital</h1>
                     <p className={styles.descricao}>
                         A WizardDex é um projeto front-end criado para reunir informações sobre o
                         universo de Harry Potter em uma interface encantadora, intuitiva e inspirada
