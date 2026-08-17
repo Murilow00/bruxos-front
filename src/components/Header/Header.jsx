@@ -1,4 +1,8 @@
+'use client';
+
 import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 import styles from './Header.module.css';
 
 export default function Header({
@@ -6,10 +10,12 @@ export default function Header({
     subtitle = 'Explorando o mundo mágico',
     totalProducts,
 }) {
+    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
     return (
         <header className={styles.header}>
             <div className={styles.container}>
-                <div className={styles.brand}>
+                <Link href="/" className={styles.brand}>
                     <div className={styles.logoWrapper}>
                         <Image
                             src="/images/escola.png"
@@ -24,7 +30,31 @@ export default function Header({
                         <h1 className={styles.title}>{title}</h1>
                         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
                     </div>
-                </div>
+                </Link>
+
+                {/* Menu Mobile */}
+                <button
+                    className={styles.menuToggle}
+                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label="Toggle menu"
+                >
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                {/* Navegação */}
+                <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
+                    <Link href="/" className={styles.navLink}>
+                        🏠 Home
+                    </Link>
+                    <Link href="/personagens" className={styles.navLink}>
+                        🧙 Personagens
+                    </Link>
+                    <Link href="/sobre" className={styles.navLink}>
+                        ℹ️ Sobre
+                    </Link>
+                </nav>
 
                 {totalProducts !== undefined && (
                     <div className={styles.badge}>

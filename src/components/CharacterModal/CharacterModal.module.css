@@ -1,0 +1,237 @@
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.modal {
+    background: white;
+    border-radius: 16px;
+    max-width: 800px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.closeBtn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #7c3f1f;
+    z-index: 10;
+    transition: all 0.3s ease;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.closeBtn:hover {
+    background-color: #f0f0f0;
+    border-radius: 50%;
+    transform: rotate(90deg);
+}
+
+.modalContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+    padding: 2rem;
+}
+
+.imageSection {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalImage {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.infoSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.modalTitle {
+    font-size: 1.8rem;
+    color: #7c3f1f;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.infoGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.infoItem {
+    background-color: #faf5f0;
+    padding: 1rem;
+    border-radius: 8px;
+    border-left: 4px solid #b8860b;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.label {
+    font-size: 0.85rem;
+    color: #999;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.value {
+    font-size: 1rem;
+    color: #333;
+    font-weight: 500;
+}
+
+.alive {
+    color: #27ae60;
+    font-weight: 700;
+}
+
+.dead {
+    color: #e74c3c;
+    font-weight: 700;
+}
+
+.modalFavoriteBtn {
+    background: linear-gradient(135deg, #7c3f1f 0%, #b8860b 100%);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.modalFavoriteBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.favorited {
+    background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+}
+
+@media (max-width: 768px) {
+    .modal {
+        width: 95%;
+        border-radius: 12px;
+    }
+
+    .modalContent {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+
+    .modalTitle {
+        font-size: 1.5rem;
+    }
+
+    .infoItem {
+        padding: 0.75rem;
+        border-radius: 6px;
+    }
+
+    .label {
+        font-size: 0.8rem;
+    }
+
+    .value {
+        font-size: 0.95rem;
+    }
+
+    .modalFavoriteBtn {
+        padding: 0.85rem 1.2rem;
+        font-size: 0.95rem;
+    }
+
+    .closeBtn {
+        top: 0.75rem;
+        right: 0.75rem;
+        width: 2rem;
+        height: 2rem;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal {
+        max-height: 95vh;
+    }
+
+    .modalContent {
+        padding: 1rem;
+    }
+
+    .modalTitle {
+        font-size: 1.3rem;
+    }
+
+    .infoGrid {
+        gap: 0.75rem;
+    }
+
+    .infoItem {
+        padding: 0.6rem;
+    }
+
+    .label {
+        font-size: 0.75rem;
+    }
+
+    .value {
+        font-size: 0.9rem;
+    }
+}

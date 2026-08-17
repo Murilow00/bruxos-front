@@ -1,0 +1,146 @@
+.card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.imageWrapper {
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    background: #f0f0f0;
+}
+
+.image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .image {
+    transform: scale(1.05);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.card:hover .overlay {
+    opacity: 1;
+}
+
+.viewMoreBtn {
+    background-color: #b8860b;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.viewMoreBtn:hover {
+    background-color: #7c3f1f;
+    transform: scale(1.05);
+}
+
+.content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.name {
+    font-size: 1.3rem;
+    color: #7c3f1f;
+    margin: 0 0 1rem 0;
+    font-weight: 700;
+}
+
+.house,
+.actor {
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0.5rem 0;
+    line-height: 1.4;
+}
+
+.house strong,
+.actor strong {
+    color: #7c3f1f;
+}
+
+.favoriteBtn {
+    background-color: #f5f5f5;
+    border: 2px solid #ddd;
+    padding: 0.7rem 1rem;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: #333;
+    transition: all 0.3s ease;
+    margin-top: auto;
+}
+
+.favoriteBtn:hover {
+    border-color: #b8860b;
+    background-color: #fff8f0;
+    color: #b8860b;
+}
+
+.favorited {
+    background-color: #ffebee;
+    border-color: #e91e63;
+    color: #e91e63;
+}
+
+.favorited:hover {
+    background-color: #ffe0e6;
+    border-color: #c2185b;
+}
+
+@media (max-width: 768px) {
+    .imageWrapper {
+        height: 280px;
+    }
+
+    .name {
+        font-size: 1.1rem;
+    }
+
+    .house,
+    .actor {
+        font-size: 0.9rem;
+    }
+
+    .viewMoreBtn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}

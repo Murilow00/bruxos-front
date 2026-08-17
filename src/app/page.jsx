@@ -1,7 +1,8 @@
 import Header from '../components/Header/Header';
+import Link from 'next/link';
 import styles from './page.module.css';
 
-const technologies = ['Next.js', 'React', 'Magias', 'Casas'];
+const technologies = ['Next.js', 'React', 'Axios', 'CSS Modules'];
 
 export default function Home() {
     return (
@@ -25,6 +26,15 @@ export default function Home() {
                             </span>
                         ))}
                     </div>
+
+                    <div className={styles.botoes}>
+                        <Link href="/personagens" className={styles.botaoPrincipal}>
+                            🧙 Explorar Personagens
+                        </Link>
+                        <Link href="/sobre" className={styles.botaoSecundario}>
+                            ℹ️ Saiba Mais
+                        </Link>
+                    </div>
                 </div>
 
                 <div className={styles.cartaoImagem}>
@@ -38,7 +48,7 @@ export default function Home() {
 
             <section className={styles.gradeInformacoes}>
                 <article className={styles.cartao}>
-                    <h3>Sobre o projeto</h3>
+                    <h3>📚 Sobre o projeto</h3>
                     <p>
                         Este projeto é uma atividade para revisar e ampliar os conhecimentos da
                         nossa turma de 2TDS1, unindo criatividade, tecnologia e o universo mágico de
@@ -47,10 +57,18 @@ export default function Home() {
                 </article>
 
                 <article className={styles.cartao}>
-                    <h3>Objetivo</h3>
+                    <h3>🎯 Objetivo</h3>
                     <p>
                         O foco desta atividade é combinar a tecnologia do Next.js e React com a
                         magia e a imaginação de Harry Potter em uma experiência visual envolvente.
+                    </p>
+                </article>
+
+                <article className={styles.cartao}>
+                    <h3>✨ Funcionalidades</h3>
+                    <p>
+                        Navegue pela enciclopédia de personagens, conheça histórias, descubra seus
+                        patronos, e não esqueça de marcar seus personagens favoritos!
                     </p>
                 </article>
             </section>
