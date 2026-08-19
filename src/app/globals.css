@@ -14,7 +14,7 @@ body {
     color: #333;
 }
 
-/* Scrollbar Styling */
+
 ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
@@ -33,7 +33,6 @@ body {
     background: #7c3f1f;
 }
 
-/* Selection Color */
 ::selection {
     background-color: #b8860b;
     color: white;

@@ -111,7 +111,6 @@
     letter-spacing: 0.3px;
 }
 
-/* Navegação */
 .nav {
     display: flex;
     gap: 2rem;
@@ -153,7 +152,6 @@
     transform-origin: left;
 }
 
-/* Menu Toggle (Mobile) */
 .menuToggle {
     display: none;
     flex-direction: column;
@@ -176,7 +174,6 @@
     background-color: #8fc4e3;
 }
 
-/* Badge */
 .badgeLabel {
     color: #b8b3db;
 }
@@ -216,7 +213,6 @@
     opacity: 1;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .container {
         flex-wrap: wrap;

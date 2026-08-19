@@ -32,7 +32,6 @@ export default function Header({
                     </div>
                 </Link>
 
-                {/* Menu Mobile */}
                 <button
                     className={styles.menuToggle}
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -43,7 +42,6 @@ export default function Header({
                     <span></span>
                 </button>
 
-                {/* Navegação */}
                 <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ''}`}>
                     <Link href="/" className={styles.navLink}>
                         🏠 Home

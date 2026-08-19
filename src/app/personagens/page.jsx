@@ -18,7 +18,6 @@ export default function Personagens() {
     const [error, setError] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Carregar favoritos do localStorage
     useEffect(() => {
         const savedFavorites = localStorage.getItem('favoriteCharacters');
         if (savedFavorites) {
@@ -30,7 +29,6 @@ export default function Personagens() {
         }
     }, []);
 
-    // Buscar personagens da API
     useEffect(() => {
         const fetchCharacters = async () => {
             try {
@@ -50,7 +48,6 @@ export default function Personagens() {
         fetchCharacters();
     }, []);
 
-    // Salvar favoritos no localStorage
     useEffect(() => {
         localStorage.setItem('favoriteCharacters', JSON.stringify(favorites));
     }, [favorites]);
@@ -90,7 +87,6 @@ export default function Personagens() {
         <>
             <Header title="Personagens" subtitle="Conheça os personagens do universo Harry Potter" />
             <main className={styles.container}>
-                {/* Barra de busca */}
                 <div className={styles.searchSection}>
                     <input
                         type="text"
@@ -101,7 +97,6 @@ export default function Personagens() {
                     />
                 </div>
 
-                {/* Estado de carregamento */}
                 {loading && (
                     <div className={styles.loadingContainer}>
                         <div className={styles.spinner}></div>
@@ -109,7 +104,6 @@ export default function Personagens() {
                     </div>
                 )}
 
-                {/* Estado de erro */}
                 {error && (
                     <div className={styles.errorContainer}>
                         <p className={styles.errorText}>⚠️ {error}</p>
@@ -122,7 +116,6 @@ export default function Personagens() {
                     </div>
                 )}
 
-                {/* Grid de personagens */}
                 {!loading && !error && characters.length > 0 && (
                     <>
                         <div className={styles.resultsInfo}>
@@ -152,7 +145,6 @@ export default function Personagens() {
                     </>
                 )}
 
-                {/* Modal de detalhes */}
                 <CharacterModal
                     isOpen={isModalOpen}
                     character={selectedCharacter}
@@ -161,7 +153,6 @@ export default function Personagens() {
                     isFavorited={isFavorited(selectedCharacter)}
                 />
 
-                {/* Navegação */}
                 <div className={styles.navegacao}>
                     <Link href="/sobre" className={styles.botao}>
                         ← Ir para Sobre
