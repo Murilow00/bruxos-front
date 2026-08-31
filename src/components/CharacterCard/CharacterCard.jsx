@@ -9,11 +9,13 @@ export default function CharacterCard({
     onFavoriteClick,
     isFavorited,
 }) {
+    const placeholderSvg = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="250" height="350"%3E%3Crect fill="%23e0e0e0" width="250" height="350"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" font-family="Arial" font-size="16" fill="%23999"%3ESem imagem%3C/text%3E%3C/svg%3E';
+
     return (
         <div className={styles.card}>
             <div className={styles.imageWrapper}>
                 <Image
-                    src={character.image || '/images/placeholder.png'}
+                    src={character.image || placeholderSvg}
                     alt={character.name}
                     width={250}
                     height={350}

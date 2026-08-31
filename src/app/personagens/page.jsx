@@ -19,38 +19,42 @@ export default function Personagens() {
     const [searchTerm, setSearchTerm] = useState('');
 
     useEffect(() => {
-        const savedFavorites = localStorage.getItem('favoriteCharacters');
-        if (savedFavorites) {
-            try {
-                setFavorites(JSON.parse(savedFavorites));
-            } catch (err) {
-                console.error('Erro ao carregar favoritos:', err);
-            }
-        }
-    }, []);
-
-    useEffect(() => {
-        const fetchCharacters = async () => {
-            try {
+        const loadCharacters = async() => {
+            try{
                 setLoading(true);
                 setError(null);
-                const response = await axios.get('https://hp-api.onrender.com/api/characters');
-                setCharacters(response.data);
+
+                const savedCharacters = localStorage.getItem('characters');
+                let allCharacters = [];
+
+                if (savedCharacters) {
+                    allCharacters = JSON.parse(savedCharacters);
+                } else {
+                    const response = await axios.get('https://hp-api.onrender.com/api/characters');
+                    allCharacters = response.data;
+
+                    localStorage.setItem('characters', JSON.stringify(allCharacters));
+                }
+                const savedFavorites = sessionStorage.getItem('favoriteCharacters');
+                const favoriteList = savedFavorites ? JSON.parse(savedFavorites) : [];
+
+                setFavorites(favoriteList);
+                setCharacters(allCharacters);
+
+
             } catch (err) {
-                console.error('Erro ao buscar personagens:', err);
+                console.error('Erro ao carregar personagens:', err);
                 setError('Erro ao carregar os personagens. Tente novamente mais tarde.');
                 toast.error('Erro ao carregar personagens!');
             } finally {
                 setLoading(false);
             }
         };
-
-        fetchCharacters();
+        loadCharacters();
     }, []);
 
-    useEffect(() => {
-        localStorage.setItem('favoriteCharacters', JSON.stringify(favorites));
-    }, [favorites]);
+
+    
 
     const handleCardClick = (character) => {
         setSelectedCharacter(character);
@@ -63,17 +67,20 @@ export default function Personagens() {
     };
 
     const handleFavoriteClick = (character) => {
-        const isFavorited = favorites.some((fav) => fav.name === character.name);
+        const isAlreadyFavorited = favorites.some((fav) => fav.name === character.name);
+        let updatedFavorites;
 
-        if (isFavorited) {
-            setFavorites(favorites.filter((fav) => fav.name !== character.name));
-            toast.success(`${character.name} removido dos favoritos!`);
+        if(isAlreadyFavorited) { 
+        updatedFavorites = favorites.filter((fav) => fav.name !== character.name);
+        toast.success(`${character.name} removido dos favoritos!`);
         } else {
-            setFavorites([...favorites, character]);
+            updatedFavorites = [...favorites, character];
             toast.success(`${character.name} adicionado aos favoritos!`);
-        }
-    };
+        }    
+        setFavorites(updatedFavorites);
 
+        sessionStorage.setItem('favoriteCharacters', JSON.stringify(updatedFavorites));
+    }
     const isFavorited = (character) => {
         if (!character) return false;
         return favorites.some((fav) => fav.name === character.name);
@@ -116,18 +123,11 @@ export default function Personagens() {
                     </div>
                 )}
 
-                {!loading && !error && characters.length > 0 && (
+                {!loading && !error && (
                     <>
-                        <div className={styles.resultsInfo}>
-                            <p>
-                                Mostrando <strong>{filteredCharacters.length}</strong> de{' '}
-                                <strong>{characters.length}</strong> personagens
-                            </p>
-                        </div>
-
-                        {filteredCharacters.length > 0 ? (
+                        {characters.length > 0 ? (
                             <div className={styles.gridCharacters}>
-                                {filteredCharacters.map((character, index) => (
+                                {characters.map((character, index) => (
                                     <CharacterCard
                                         key={`${index}-${character.name}`}
                                         character={character}
@@ -139,8 +139,8 @@ export default function Personagens() {
                             </div>
                         ) : (
                             <div className={styles.noResults}>
-                                <p>Nenhum personagem encontrado com "{searchTerm}"</p>
-                            </div>
+                                <p>Nenhum personagem encontrado</p>
+                            </div >
                         )}
                     </>
                 )}
