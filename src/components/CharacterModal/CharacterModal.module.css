@@ -22,7 +22,7 @@
 }
 
 .modal {
-    background: white;
+    background: var(--bg-primary);
     border-radius: 16px;
     max-width: 800px;
     width: 90%;
@@ -30,6 +30,7 @@
     overflow-y: auto;
     position: relative;
     animation: slideIn 0.3s ease;
+    color: var(--text-primary);
 }
 
 @keyframes slideIn {
@@ -51,7 +52,7 @@
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-    color: #7c3f1f;
+    color: var(--accent-dark);
     z-index: 10;
     transition: all 0.3s ease;
     width: 2.5rem;
@@ -62,7 +63,7 @@
 }
 
 .closeBtn:hover {
-    background-color: #f0f0f0;
+    background-color: var(--bg-secondary);
     border-radius: 50%;
     transform: rotate(90deg);
 }
@@ -95,7 +96,7 @@
 
 .modalTitle {
     font-size: 1.8rem;
-    color: #7c3f1f;
+    color: var(--accent-dark);
     margin-bottom: 1.5rem;
     font-weight: 700;
 }
@@ -108,10 +109,10 @@
 }
 
 .infoItem {
-    background-color: #faf5f0;
+    background-color: var(--bg-secondary);
     padding: 1rem;
     border-radius: 8px;
-    border-left: 4px solid #b8860b;
+    border-left: 4px solid var(--accent-gold);
     display: flex;
     flex-direction: column;
     gap: 0.3rem;
@@ -119,7 +120,7 @@
 
 .label {
     font-size: 0.85rem;
-    color: #999;
+    color: var(--text-secondary);
     text-transform: uppercase;
     font-weight: 600;
     letter-spacing: 0.5px;
@@ -127,7 +128,7 @@
 
 .value {
     font-size: 1rem;
-    color: #333;
+    color: var(--text-primary);
     font-weight: 500;
 }
 
@@ -142,7 +143,7 @@
 }
 
 .modalFavoriteBtn {
-    background: linear-gradient(135deg, #7c3f1f 0%, #b8860b 100%);
+    background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-gold) 100%);
     color: white;
     border: none;
     padding: 1rem 1.5rem;

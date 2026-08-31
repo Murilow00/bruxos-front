@@ -7,7 +7,8 @@
 .secao {
     margin-bottom: 2.5rem;
     padding-bottom: 2rem;
-    border-bottom: 2px solid #f0f0f0;
+    border-bottom: 2px solid var(--border-color);
+    transition: all var(--transition-duration) ease;
 }
 
 .secao:last-of-type {
@@ -16,40 +17,46 @@
 
 .titulo {
     font-size: 2rem;
-    color: #1e40af;
+    color: var(--accent-gold);
     margin-bottom: 1rem;
     font-weight: 700;
+    transition: color var(--transition-duration) ease;
 }
 
 .subtitulo {
     font-size: 1.5rem;
-    color: #3b82f6;
+    color: var(--text-primary);
     margin-bottom: 1rem;
     font-weight: 600;
+    transition: color var(--transition-duration) ease;
 }
 
 .texto {
     font-size: 1rem;
     line-height: 1.6;
-    color: #333;
+    color: var(--text-primary);
     text-align: justify;
+    transition: color var(--transition-duration) ease;
 }
 
 .info {
-    background-color: #f0f9ff;
+    background-color: var(--bg-secondary);
     padding: 1.5rem;
     border-radius: 8px;
-    border-left: 4px solid #3b82f6;
+    border-left: 4px solid var(--accent-gold);
+    transition: all var(--transition-duration) ease;
 }
 
 .info p {
     margin: 0.5rem 0;
     font-size: 1rem;
-    color: #333;
+    color: var(--text-primary);
+    transition: color var(--transition-duration) ease;
 }
 
 .info strong {
-    color: #1e40af;
+    color: var(--accent-dark);
+    transition: color var(--transition-duration) ease;
 }
 
 .lista {
@@ -62,8 +69,9 @@
     padding-left: 2rem;
     position: relative;
     font-size: 1rem;
-    color: #333;
+    color: var(--text-primary);
     line-height: 1.5;
+    transition: color var(--transition-duration) ease;
 }
 
 .itemLista::before {
@@ -81,13 +89,13 @@
 }
 
 .tech {
-    background: linear-gradient(135deg, #1e40af 0%, #3b82f6 100%);
+    background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent-gold) 100%);
     color: white;
     padding: 0.7rem 1.2rem;
     border-radius: 20px;
     font-size: 0.95rem;
     font-weight: 500;
-    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.2);
+    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -105,22 +113,22 @@
 }
 
 .botao {
-    background-color: #1e40af;
+    background-color: var(--accent-dark);
     color: white;
     padding: 0.85rem 1.8rem;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 600;
     transition: all 0.3s ease;
-    border: 2px solid #1e40af;
+    border: 2px solid var(--accent-dark);
     display: inline-block;
 }
 
 .botao:hover {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
+    background-color: var(--accent-gold);
+    border-color: var(--accent-gold);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    box-shadow: 0 4px 12px rgba(184, 134, 11, 0.3);
 }
 
 .galeriaIntegrantes {
@@ -129,26 +137,27 @@
     gap: 3rem;
     margin-top: 2rem;
     padding: 2rem;
-    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+    background: var(--bg-secondary);
     border-radius: 16px;
-    box-shadow: 0 2px 8px rgba(30, 64, 175, 0.1);
+    box-shadow: 0 2px 8px rgba(184, 134, 11, 0.1);
+    transition: all var(--transition-duration) ease;
 }
 
 .cardIntegrante {
-    background: white;
+    background: var(--bg-primary);
     border-radius: 16px;
     overflow: hidden;
-    box-shadow: 0 6px 20px rgba(30, 64, 175, 0.12);
+    box-shadow: 0 6px 20px rgba(184, 134, 11, 0.12);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     text-align: center;
-    border: 2px solid rgba(59, 130, 246, 0.2);
+    border: 2px solid var(--border-color);
     position: relative;
 }
 
 .cardIntegrante:hover {
     transform: translateY(-12px) scale(1.02);
-    box-shadow: 0 16px 40px rgba(30, 64, 175, 0.25);
-    border-color: #3b82f6;
+    box-shadow: 0 16px 40px rgba(184, 134, 11, 0.25);
+    border-color: var(--accent-gold);
 }
 
 .cardIntegrante::before {
@@ -158,7 +167,7 @@
     left: 0;
     right: 0;
     height: 4px;
-    background: linear-gradient(90deg, #1e40af, #3b82f6, #1e40af);
+    background: linear-gradient(90deg, var(--accent-dark), var(--accent-gold), var(--accent-dark));
     opacity: 0;
     transition: opacity 0.3s ease;
     z-index: 10;
@@ -172,8 +181,9 @@
     width: 100%;
     height: 280px;
     overflow: hidden;
-    background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+    background: var(--bg-secondary);
     position: relative;
+    transition: background-color var(--transition-duration) ease;
 }
 
 .fotoIntegrante {
@@ -191,11 +201,12 @@
 
 .nomeIntegrante {
     font-size: 1.3rem;
-    color: #1e40af;
+    color: var(--accent-gold);
     margin: 1.5rem;
     font-weight: 700;
     letter-spacing: 0.5px;
     text-transform: capitalize;
+    transition: color var(--transition-duration) ease;
 }
 
 .cardIntegrante::after {

@@ -1,11 +1,11 @@
 .header {
     width: 100%;
-    background: linear-gradient(135deg, #8fc4e3 0%, #6fa8c8 30%, #4a7ba7 60%, #1f4f4d 100%);
-    border: 1px solid rgba(143, 196, 227, 0.3);
+    background: linear-gradient(135deg, var(--header-gradient-1) 0%, var(--header-gradient-2) 30%, var(--header-gradient-3) 60%, var(--header-gradient-4) 100%);
+    border: 1px solid var(--header-border);
     padding: 16px 28px;
     margin-bottom: 30px;
     box-shadow:
-        0 10px 30px rgba(31, 79, 77, 0.25),
+        0 10px 30px var(--header-shadow),
         inset 0 1px 0 rgba(255, 255, 255, 0.15);
     position: relative;
     overflow: hidden;
@@ -19,7 +19,7 @@
     left: -10%;
     width: 250px;
     height: 250px;
-    background: radial-gradient(circle, rgba(143, 196, 227, 0.2) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--header-glow) 0%, transparent 70%);
     pointer-events: none;
     transition: all 0.4s ease;
 }
@@ -47,11 +47,11 @@
     align-items: center;
     justify-content: center;
     padding: 4px;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(143, 196, 227, 0.3);
+    background: var(--logo-bg);
+    border: 1px solid var(--logo-border);
     border-radius: 12px;
     backdrop-filter: blur(8px);
-    box-shadow: 0 0 12px rgba(74, 123, 167, 0.15);
+    box-shadow: 0 0 12px var(--logo-shadow);
     transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
 }
@@ -68,11 +68,11 @@
 }
 
 .logoWrapper:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(143, 196, 227, 0.6);
+    background: var(--logo-bg-hover);
+    border-color: var(--logo-border-hover);
     box-shadow:
-        0 0 20px rgba(74, 123, 167, 0.3),
-        0 0 30px rgba(143, 196, 227, 0.2),
+        0 0 20px var(--logo-shadow-hover-1),
+        0 0 30px var(--logo-shadow-hover-2),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
@@ -98,7 +98,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0;
-    background: linear-gradient(90deg, #ffffff 0%, #8fc4e3 100%);
+    background: linear-gradient(90deg, var(--title-gradient-1) 0%, var(--title-gradient-2) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 0.5px;
@@ -106,9 +106,10 @@
 
 .subtitle {
     font-size: 0.85rem;
-    color: #1f4f4d;
+    color: var(--subtitle-color);
     margin: 0;
     letter-spacing: 0.3px;
+    transition: color var(--transition-duration) ease;
 }
 
 .nav {
@@ -120,7 +121,7 @@
 }
 
 .navLink {
-    color: white;
+    color: var(--navlink-color);
     text-decoration: none;
     font-weight: 600;
     font-size: 1rem;
@@ -137,14 +138,14 @@
     left: 1rem;
     width: calc(100% - 2rem);
     height: 2px;
-    background-color: white;
+    background-color: var(--navlink-underline);
     transform: scaleX(0);
     transform-origin: right;
     transition: transform 0.3s ease;
 }
 
 .navLink:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--navlink-hover-bg);
 }
 
 .navLink:hover::after {
@@ -165,22 +166,23 @@
 .menuToggle span {
     width: 25px;
     height: 3px;
-    background-color: white;
+    background-color: var(--menu-toggle-color);
     border-radius: 2px;
     transition: all 0.3s ease;
 }
 
 .menuToggle:hover span {
-    background-color: #8fc4e3;
+    background-color: var(--menu-toggle-hover);
 }
 
 .badgeLabel {
-    color: #b8b3db;
+    color: var(--badge-label-color);
+    transition: color var(--transition-duration) ease;
 }
 
 .badgeValue {
-    background: linear-gradient(135deg, #4a7ba7 0%, #8fc4e3 100%);
-    color: #1f4f4d;
+    background: linear-gradient(135deg, var(--badge-gradient-1) 0%, var(--badge-gradient-2) 100%);
+    color: var(--badge-text-color);
     font-weight: 700;
     padding: 2px 8px;
     border-radius: 10px;
@@ -205,8 +207,8 @@
 .badgeValue:hover {
     transform: scale(1.08);
     box-shadow:
-        0 4px 16px rgba(74, 123, 167, 0.4),
-        0 0 15px rgba(143, 196, 227, 0.3);
+        0 4px 16px var(--badge-shadow-1),
+        0 0 15px var(--badge-shadow-2);
 }
 
 .badgeValue:hover::after {
@@ -229,8 +231,8 @@
         right: 0;
         flex-direction: column;
         gap: 0;
-        background: linear-gradient(135deg, #8fc4e3 0%, #6fa8c8 30%, #4a7ba7 60%, #1f4f4d 100%);
-        border-top: 1px solid rgba(143, 196, 227, 0.3);
+        background: linear-gradient(135deg, var(--header-gradient-1) 0%, var(--header-gradient-2) 30%, var(--header-gradient-3) 60%, var(--header-gradient-4) 100%);
+        border-top: 1px solid var(--header-border);
         padding: 1rem 0;
         max-height: 0;
         overflow: hidden;

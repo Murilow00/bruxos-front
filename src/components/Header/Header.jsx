@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import styles from './Header.module.css';
+import TemaComponent from "./TemaComponent";
 
 export default function Header({
     title = 'WizardDex',
@@ -54,6 +55,8 @@ export default function Header({
                     </Link>
                 </nav>
 
+                <TemaComponent />
+
                 {totalProducts !== undefined && (
                     <div className={styles.badge}>
                         <span className={styles.badgeLabel}>Produtos:</span>
@@ -64,3 +67,5 @@ export default function Header({
         </header>
     );
 }
+
+
