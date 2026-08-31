@@ -1,0 +1,25 @@
+.themeButton {
+  background-color: #000000;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  white-space: nowrap;
+}
+
+.themeButton:hover {
+  background-color: #000000;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(124, 63, 31, 0.3);
+}
+
+.themeButton:active {
+  transform: scale(0.98);
+}
