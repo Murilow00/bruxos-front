@@ -4,28 +4,52 @@
     padding: 0 1rem;
 }
 
-.searchSection {
-    margin-bottom: 2rem;
+.tabs {
     display: flex;
     justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
-.searchInput {
-    width: 100%;
-    max-width: 500px;
-    padding: 0.85rem 1.2rem;
-    font-size: 1rem;
+.tabButton {
     border: 2px solid var(--border-color);
-    border-radius: 8px;
-    transition: all 0.3s ease;
     background-color: var(--bg-secondary);
     color: var(--text-primary);
+    padding: 0.8rem 1.4rem;
+    border-radius: 999px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
 }
 
-.searchInput:focus {
-    outline: none;
+.tabButton:hover {
     border-color: var(--accent-gold);
-    box-shadow: 0 0 8px rgba(184, 134, 11, 0.3);
+    transform: translateY(-1px);
+}
+
+.tabButtonActive {
+    background: linear-gradient(135deg, var(--accent-dark), var(--accent-gold));
+    border-color: var(--accent-gold);
+    color: white;
+    box-shadow: 0 10px 20px rgba(184, 134, 11, 0.2);
+}
+
+.tabCount {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 1.8rem;
+    height: 1.8rem;
+    padding: 0 0.4rem;
+    border-radius: 999px;
+    background-color: rgba(255, 255, 255, 0.18);
+    font-size: 0.8rem;
+    font-weight: 700;
 }
 
 .loadingContainer {
@@ -165,9 +189,9 @@
         gap: 1rem;
     }
 
-    .searchInput {
+    .tabButton {
         font-size: 0.95rem;
-        padding: 0.75rem 1rem;
+        padding: 0.7rem 1.1rem;
     }
 
     .loadingContainer {
@@ -200,9 +224,9 @@
         grid-template-columns: 1fr;
     }
 
-    .searchInput {
+    .tabButton {
         font-size: 0.9rem;
-        padding: 0.7rem 1rem;
+        padding: 0.65rem 1rem;
     }
 
     .resultsInfo {

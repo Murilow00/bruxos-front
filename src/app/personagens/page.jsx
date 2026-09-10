@@ -16,7 +16,7 @@ export default function Personagens() {
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [searchTerm, setSearchTerm] = useState('');
+    const [activeTab, setActiveTab] = useState('all');
 
     useEffect(() => {
         const loadCharacters = async() => {
@@ -86,22 +86,31 @@ export default function Personagens() {
         return favorites.some((fav) => fav.name === character.name);
     };
 
-    const filteredCharacters = characters.filter((character) =>
-        character.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const visibleCharacters = activeTab === 'favorites'
+        ? characters.filter((character) => isFavorited(character))
+        : characters;
 
     return (
         <>
             <Header title="Personagens" subtitle="Conheça os personagens do universo Harry Potter" />
             <main className={styles.container}>
-                <div className={styles.searchSection}>
-                    <input
-                        type="text"
-                        placeholder="🔍 Buscar personagem..."
-                        value={searchTerm}
-                        onChange={(e) => setSearchTerm(e.target.value)}
-                        className={styles.searchInput}
-                    />
+                <div className={styles.tabs}>
+                    <button
+                        type="button"
+                        className={`${styles.tabButton} ${activeTab === 'all' ? styles.tabButtonActive : ''}`}
+                        onClick={() => setActiveTab('all')}
+                    >
+                        Todos
+                        <span className={styles.tabCount}>{characters.length}</span>
+                    </button>
+                    <button
+                        type="button"
+                        className={`${styles.tabButton} ${activeTab === 'favorites' ? styles.tabButtonActive : ''}`}
+                        onClick={() => setActiveTab('favorites')}
+                    >
+                        Favoritos
+                        <span className={styles.tabCount}>{favorites.length}</span>
+                    </button>
                 </div>
 
                 {loading && (
@@ -125,9 +134,9 @@ export default function Personagens() {
 
                 {!loading && !error && (
                     <>
-                        {characters.length > 0 ? (
+                        {visibleCharacters.length > 0 ? (
                             <div className={styles.gridCharacters}>
-                                {characters.map((character, index) => (
+                                {visibleCharacters.map((character, index) => (
                                     <CharacterCard
                                         key={`${index}-${character.name}`}
                                         character={character}
@@ -139,8 +148,12 @@ export default function Personagens() {
                             </div>
                         ) : (
                             <div className={styles.noResults}>
-                                <p>Nenhum personagem encontrado</p>
-                            </div >
+                                <p>
+                                    {activeTab === 'favorites'
+                                        ? 'Nenhum personagem favoritado ainda.'
+                                        : 'Nenhum personagem encontrado'}
+                                </p>
+                            </div>
                         )}
                     </>
                 )}
