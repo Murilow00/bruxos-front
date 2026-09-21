@@ -30,7 +30,7 @@ export default function Personagens() {
                 if (savedCharacters) {
                     allCharacters = JSON.parse(savedCharacters);
                 } else {
-                    const response = await axios.get('https://hp-api.onrender.com/api/characters');
+                    const response = await axios.get('/api/personagem');
                     allCharacters = response.data;
 
                     localStorage.setItem('characters', JSON.stringify(allCharacters));
@@ -54,7 +54,7 @@ export default function Personagens() {
     }, []);
 
 
-    
+
 
     const handleCardClick = (character) => {
         setSelectedCharacter(character);
@@ -70,13 +70,13 @@ export default function Personagens() {
         const isAlreadyFavorited = favorites.some((fav) => fav.name === character.name);
         let updatedFavorites;
 
-        if(isAlreadyFavorited) { 
+        if(isAlreadyFavorited) {
         updatedFavorites = favorites.filter((fav) => fav.name !== character.name);
         toast.success(`${character.name} removido dos favoritos!`);
         } else {
             updatedFavorites = [...favorites, character];
             toast.success(`${character.name} adicionado aos favoritos!`);
-        }    
+        }
         setFavorites(updatedFavorites);
 
         sessionStorage.setItem('favoriteCharacters', JSON.stringify(updatedFavorites));
