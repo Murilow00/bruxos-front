@@ -28,6 +28,7 @@ export default function CharacterModal({
                             alt={character.name}
                             width={300}
                             height={400}
+                            unoptimized={character.id?.startsWith('custom-')}
                             priority
                             className={styles.modalImage}
                         />
