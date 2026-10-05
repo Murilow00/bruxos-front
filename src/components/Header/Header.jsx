@@ -50,6 +50,9 @@ export default function Header({
                     <Link href="/personagens" className={styles.navLink}>
                         🧙 Personagens
                     </Link>
+                    <Link href="/favoritos" className={styles.navLink}>
+                        ❤️ Favoritos
+                    </Link>
                     <Link href="/sobre" className={styles.navLink}>
                         ℹ️ Sobre
                     </Link>

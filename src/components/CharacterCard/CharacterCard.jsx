@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './CharacterCard.module.css';
 
 export default function CharacterCard({
@@ -8,6 +9,7 @@ export default function CharacterCard({
     onCardClick,
     onFavoriteClick,
     isFavorited,
+    detailsHref,
 }) {
     const placeholderSvg = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="250" height="350"%3E%3Crect fill="%23e0e0e0" width="250" height="350"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" font-family="Arial" font-size="16" fill="%23999"%3ESem imagem%3C/text%3E%3C/svg%3E';
 
@@ -23,8 +25,19 @@ export default function CharacterCard({
                     priority
                     className={styles.image}
                 />
-                <div className={styles.overlay} onClick={() => onCardClick(character)}>
-                    <button className={styles.viewMoreBtn}>Ver Detalhes</button>
+                <div
+                    className={styles.overlay}
+                    onClick={detailsHref ? undefined : () => onCardClick(character)}
+                >
+                    {detailsHref ? (
+                        <Link href={detailsHref} className={styles.viewMoreBtn}>
+                            Ver Detalhes
+                        </Link>
+                    ) : (
+                        <button type="button" className={styles.viewMoreBtn}>
+                            Ver Detalhes
+                        </button>
+                    )}
                 </div>
             </div>
 

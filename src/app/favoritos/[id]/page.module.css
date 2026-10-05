@@ -1,0 +1,133 @@
+.container {
+    max-width: 1120px;
+    margin: 2rem auto;
+    padding: 0 1rem 3rem;
+}
+
+.backLink {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--accent-dark);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.backLink:hover {
+    color: var(--accent-gold);
+}
+
+.detail {
+    display: grid;
+    grid-template-columns: minmax(240px, 360px) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 3rem);
+    align-items: start;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.imageFrame {
+    overflow: hidden;
+    background: var(--bg-secondary);
+}
+
+.image {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.info {
+    min-width: 0;
+}
+
+.eyebrow {
+    margin: 0 0 0.5rem;
+    color: var(--accent-gold);
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+.info h2 {
+    margin: 0 0 1.5rem;
+    color: var(--text-primary);
+    font-size: 2rem;
+    overflow-wrap: anywhere;
+}
+
+.facts {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.facts div {
+    min-width: 0;
+    padding: 0.9rem 0.75rem 0.9rem 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.facts dt {
+    margin-bottom: 0.3rem;
+    color: var(--text-secondary);
+    font-size: 0.82rem;
+}
+
+.facts dd {
+    margin: 0;
+    color: var(--text-primary);
+    font-weight: 650;
+    overflow-wrap: anywhere;
+}
+
+.removeButton {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid #c53d4a;
+    border-radius: 6px;
+    background: transparent;
+    color: #c53d4a;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.removeButton:hover {
+    background: #c53d4a;
+    color: #fff;
+}
+
+.message {
+    padding: 3rem 1rem;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.message a {
+    color: var(--accent-dark);
+    font-weight: 700;
+}
+
+@media (max-width: 720px) {
+    .detail {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .imageFrame {
+        width: min(100%, 360px);
+        margin: 0 auto;
+    }
+
+    .info h2 {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 420px) {
+    .facts {
+        grid-template-columns: 1fr;
+    }
+}
