@@ -19,6 +19,7 @@ export default function CharacterCard({
                     alt={character.name}
                     width={250}
                     height={350}
+                    unoptimized={character.id?.startsWith('custom-')}
                     priority
                     className={styles.image}
                 />

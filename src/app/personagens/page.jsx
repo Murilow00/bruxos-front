@@ -9,10 +9,25 @@ import CharacterModal from '@/components/CharacterModal/CharacterModal';
 import Link from 'next/link';
 import styles from './page.module.css';
 
+const createEmptyCharacter = () => ({
+    name: '',
+    house: '',
+    species: '',
+    patronus: '',
+    actor: '',
+    eyeColour: '',
+    hairColour: '',
+    dateOfBirth: '',
+    image: '',
+    alive: true,
+});
+
 export default function Personagens() {
     const [characters, setCharacters] = useState([]);
     const [selectedCharacter, setSelectedCharacter] = useState(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
+    const [newCharacter, setNewCharacter] = useState(createEmptyCharacter);
     const [favorites, setFavorites] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -25,16 +40,21 @@ export default function Personagens() {
                 setError(null);
 
                 const savedCharacters = localStorage.getItem('characters');
-                let allCharacters = [];
+                const cachedCharacters = savedCharacters ? JSON.parse(savedCharacters) : [];
+                let allCharacters = cachedCharacters;
 
-                if (savedCharacters) {
-                    allCharacters = JSON.parse(savedCharacters);
-                } else {
+                try {
                     const response = await axios.get('/api/personagem');
-                    allCharacters = response.data;
-
+                    const customCharacters = cachedCharacters.filter((character) =>
+                        character.id?.startsWith('custom-')
+                    );
+                    allCharacters = [...response.data, ...customCharacters];
                     localStorage.setItem('characters', JSON.stringify(allCharacters));
+                } catch (apiError) {
+                    if (cachedCharacters.length === 0) throw apiError;
+                    console.error('Usando personagens salvos: a API está indisponível.', apiError);
                 }
+
                 const savedFavorites = sessionStorage.getItem('favoriteCharacters');
                 const favoriteList = savedFavorites ? JSON.parse(savedFavorites) : [];
 
@@ -66,6 +86,35 @@ export default function Personagens() {
         setSelectedCharacter(null);
     };
 
+    const handleCreateCharacter = (event) => {
+        event.preventDefault();
+        const character = {
+            ...newCharacter,
+            name: newCharacter.name.trim(),
+            id: `custom-${Date.now()}`,
+        };
+
+        if (!character.name) {
+            toast.error('Informe o nome do personagem.');
+            return;
+        }
+
+        const updatedCharacters = [...characters, character];
+        setCharacters(updatedCharacters);
+        localStorage.setItem('characters', JSON.stringify(updatedCharacters));
+        setNewCharacter(createEmptyCharacter());
+        setIsCreateModalOpen(false);
+        toast.success('Personagem adicionado!');
+    };
+
+    const handleNewCharacterChange = (event) => {
+        const { name, value } = event.target;
+        setNewCharacter((currentCharacter) => ({
+            ...currentCharacter,
+            [name]: name === 'alive' ? value === 'true' : value,
+        }));
+    };
+
     const handleFavoriteClick = (character) => {
         const isAlreadyFavorited = favorites.some((fav) => fav.name === character.name);
         let updatedFavorites;
@@ -94,22 +143,32 @@ export default function Personagens() {
         <>
             <Header title="Personagens" subtitle="Conheça os personagens do universo Harry Potter" />
             <main className={styles.container}>
-                <div className={styles.tabs}>
+                <div className={styles.listToolbar}>
+                    <div className={styles.tabs}>
+                        <button
+                            type="button"
+                            className={`${styles.tabButton} ${activeTab === 'all' ? styles.tabButtonActive : ''}`}
+                            onClick={() => setActiveTab('all')}
+                        >
+                            Todos
+                            <span className={styles.tabCount}>{characters.length}</span>
+                        </button>
+                        <button
+                            type="button"
+                            className={`${styles.tabButton} ${activeTab === 'favorites' ? styles.tabButtonActive : ''}`}
+                            onClick={() => setActiveTab('favorites')}
+                        >
+                            Favoritos
+                            <span className={styles.tabCount}>{favorites.length}</span>
+                        </button>
+                    </div>
                     <button
                         type="button"
-                        className={`${styles.tabButton} ${activeTab === 'all' ? styles.tabButtonActive : ''}`}
-                        onClick={() => setActiveTab('all')}
+                        className={styles.addCharacterButton}
+                        disabled={loading}
+                        onClick={() => setIsCreateModalOpen(true)}
                     >
-                        Todos
-                        <span className={styles.tabCount}>{characters.length}</span>
-                    </button>
-                    <button
-                        type="button"
-                        className={`${styles.tabButton} ${activeTab === 'favorites' ? styles.tabButtonActive : ''}`}
-                        onClick={() => setActiveTab('favorites')}
-                    >
-                        Favoritos
-                        <span className={styles.tabCount}>{favorites.length}</span>
+                        <span aria-hidden="true">＋</span> Adicionar personagem
                     </button>
                 </div>
 
@@ -165,6 +224,76 @@ export default function Personagens() {
                     onFavoriteClick={handleFavoriteClick}
                     isFavorited={isFavorited(selectedCharacter)}
                 />
+
+                {isCreateModalOpen && (
+                    <div className={styles.createOverlay}>
+                        <section
+                            className={styles.createModal}
+                            role="dialog"
+                            aria-modal="true"
+                            aria-labelledby="createCharacterTitle"
+                        >
+                            <div className={styles.createModalHeader}>
+                                <h2 id="createCharacterTitle">Adicionar personagem</h2>
+                                <button
+                                    type="button"
+                                    className={styles.closeCreateModal}
+                                    aria-label="Fechar formulário"
+                                    onClick={() => setIsCreateModalOpen(false)}
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <form className={styles.createForm} onSubmit={handleCreateCharacter}>
+                                {[
+                                    { name: 'name', label: 'Nome', required: true },
+                                    { name: 'house', label: 'Casa' },
+                                    { name: 'species', label: 'Espécie' },
+                                    { name: 'patronus', label: 'Patrono' },
+                                    { name: 'actor', label: 'Ator/Atriz' },
+                                    { name: 'eyeColour', label: 'Cor dos olhos' },
+                                    { name: 'hairColour', label: 'Cor do cabelo' },
+                                    { name: 'dateOfBirth', label: 'Data de nascimento' },
+                                    { name: 'image', label: 'URL da imagem', type: 'url' },
+                                ].map(({ name, label, required = false, type = 'text' }) => (
+                                    <label className={styles.formField} key={name}>
+                                        <span>{label}{required ? ' *' : ''}</span>
+                                        <input
+                                            name={name}
+                                            type={type}
+                                            value={newCharacter[name]}
+                                            onChange={handleNewCharacterChange}
+                                            required={required}
+                                        />
+                                    </label>
+                                ))}
+                                <label className={styles.formField}>
+                                    <span>Situação</span>
+                                    <select
+                                        name="alive"
+                                        value={String(newCharacter.alive)}
+                                        onChange={handleNewCharacterChange}
+                                    >
+                                        <option value="true">Vivo</option>
+                                        <option value="false">Morto</option>
+                                    </select>
+                                </label>
+                                <div className={styles.formActions}>
+                                    <button
+                                        type="button"
+                                        className={styles.cancelCreateButton}
+                                        onClick={() => setIsCreateModalOpen(false)}
+                                    >
+                                        Cancelar
+                                    </button>
+                                    <button type="submit" className={styles.saveCharacterButton}>
+                                        Salvar personagem
+                                    </button>
+                                </div>
+                            </form>
+                        </section>
+                    </div>
+                )}
 
                 <div className={styles.navegacao}>
                     <Link href="/sobre" className={styles.botao}>
